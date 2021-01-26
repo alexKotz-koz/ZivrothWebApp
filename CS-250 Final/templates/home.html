@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+
+
+<h1> Welcome {{ user }} to your Production Hub!</h1>
+<p>This site is for music creators to upload and share tracks.</p>
+
+<table id="table">
+    <th>Song</th>
+    <th>Cover</th>
+    <th>File</th>
+    {% for song in account %}
+        <tr>
+            <td>{{ song.songName }}</td>
+            <td><img src={{song.coverArtFile}} width="50px" height="50px"/></td>
+                <td><audio controls>
+                <source id=source src={{song.songFile}} type="audio/wav">
+            </audio></td>
+            <td><a href="/delete/{{song.id}}">Delete</a></td>
+        </tr>
+
+    {% endfor %}
+</table>
+{% endblock %}

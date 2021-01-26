@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Upload-ProductionHub {% endblock %}
+
+{% block content %}
+ <form action = "/upload" method = "post" enctype = "multipart/form-data">
+     <label for="songName">Song Name: </label>
+     <input type="text" id="songName" name="songName"><br>
+     <label for="songFile">Song: </label>
+     <input type="file" class="text" id="songFile" name="songfile"/><br>
+     <label for="coverartfile">Cover Art: </label>
+     <input type="file" class="text" id="coverArtFile" name="coverartfile"><br>
+     <input type = "submit"/>
+ </form>
+
+<script>
+    console.log("here")
+    var songName = document.getElementById("songName");
+    var songFile = document.getElementById("songFile");
+    var coverArtFile = document.getElementById("coverArtFile");
+
+    if (songFile == null || songName == null || coverArtFile == null){
+        alert("Please fill out all fields to upload song");
+    }
+
+</script>
+
+
+{% endblock %}
