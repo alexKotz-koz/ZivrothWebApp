@@ -8,6 +8,8 @@ from werkzeug.utils import secure_filename
 from flask_json import FlaskJSON, json_response
 from flask_hashing import Hashing
 
+from model import Users, Account
+
 UPLOAD_FOLDER_SONG = '~/static/song'
 UPLOAD_FOLDER_COVER = '~/static/cover'
 ALLOWED_EXTENSIONS = {'wav', 'mp3'}
@@ -35,23 +37,6 @@ random_SKstring = generate_SK()
 app.config['SECRET_KEY'] = random_SKstring
 login_manager = LoginManager(app)
 login_manager.init_app(app)
-
-
-class Users(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), unique=True, nullable=False)
-    password = db.Column(db.String(40), nullable=False)
-    name = db.Column(db.String(40), nullable=False)
-    entries = db.relationship('Account', backref='user')
-
-
-class Account(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    songName = db.Column(db.String(40))
-    songFile = db.Column(db.String(100))
-    coverArtFile = db.Column(db.String(100))
-    jsonObject = db.Column(db.String(800))
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
 @login_manager.user_loader
